@@ -14,7 +14,7 @@ class MemberRepository {
 
             const documents = [];
             snapshot.forEach(doc => {
-                documents.push({ id: doc.id, ...doc.data() });
+                documents.push({ ...doc.data() });
             });
             return documents;
         } catch (error) {
@@ -24,7 +24,7 @@ class MemberRepository {
     }
     async findByCondition(conditions) {
         try {
-            let collectionRef = db.collection(collectionName);
+            let collectionRef = this.db.collection(this.collectionName);
             conditions.forEach(condition => {
                 collectionRef = collectionRef.where(condition.field, condition.operator, condition.value);
             });
@@ -37,7 +37,7 @@ class MemberRepository {
 
             const documents = [];
             snapshot.forEach(doc => {
-                documents.push({ id: doc.id, ...doc.data() });
+                documents.push({ ...doc.data() });
             });
             return documents;
         } catch (error) {
@@ -48,7 +48,7 @@ class MemberRepository {
     async add(data) {
         try {
             const collectionRef = this.db.collection(this.collectionName);
-            const result = await collectionRef.add(data);
+            const result = await collectionRef.doc(data.code).set(data);
             return result.id;
         } catch (error) {
             console.error('Error adding document', error);

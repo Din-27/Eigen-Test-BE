@@ -1,13 +1,13 @@
 const router = require('express').Router()
-const { GetMembersController, AddMemberController, LoanBooksController } = require('../controllers/member.controller')
+const { GetBookController, AddBookController } = require('../controllers/book.controller')
 
 /**
    * @openapi
-   * '/api/v1/member':
+   * '/api/v1/book':
    *  get:
    *     tags:
-   *     - Members
-   *     summary: get members
+   *     - Books
+   *     summary: get books
    *     responses:
    *      200:
    *        description: Success
@@ -16,21 +16,23 @@ const { GetMembersController, AddMemberController, LoanBooksController } = requi
    *      500:
    *        description: Server error
    */
-router.get('/', GetMembersController)
-
+router.get('/', GetBookController)
 /**
    * @openapi
-   * '/api/v1/member':
+   * '/api/v1/book':
    *  post:
    *     tags:
-   *     - Members
-   *     summary: add members
+   *     - Books
+   *     summary: add book
    *     requestBody:
    *      required: true
    *      content:
    *        application/json:
    *           example:
-   *            name: Herdiyana
+   *            code: JK-45
+   *            title: Harry Potter
+   *            author: J.K Rowling
+   *            stock: 1
    *     responses:
    *      200:
    *        description: Success
@@ -39,6 +41,6 @@ router.get('/', GetMembersController)
    *      500:
    *        description: Server error
    */
-router.post('/', AddMemberController)
+router.post('/', AddBookController)
 
 module.exports = router

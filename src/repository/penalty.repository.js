@@ -1,7 +1,7 @@
 class PenaltyRepository {
     constructor(db) {
         this.db = db
-        this.collectionName = 'penalty'
+        this.collectionName = 'penalti'
     }
     async findAll() {
         try {
@@ -14,7 +14,7 @@ class PenaltyRepository {
 
             const documents = [];
             snapshot.forEach(doc => {
-                documents.push({ id: doc.id, ...doc.data() });
+                documents.push({  ...doc.data() });
             });
             return documents;
         } catch (error) {
@@ -24,7 +24,7 @@ class PenaltyRepository {
     }
     async findByCondition(conditions) {
         try {
-            let collectionRef = db.collection(collectionName);
+            let collectionRef = this.db.collection(this.collectionName);
             conditions.forEach(condition => {
                 collectionRef = collectionRef.where(condition.field, condition.operator, condition.value);
             });
@@ -37,7 +37,7 @@ class PenaltyRepository {
 
             const documents = [];
             snapshot.forEach(doc => {
-                documents.push({ id: doc.id, ...doc.data() });
+                documents.push({  ...doc.data() });
             });
             return documents;
         } catch (error) {

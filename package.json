@@ -2,7 +2,7 @@
   "name": "eigen-test-case",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.js",
@@ -15,6 +15,9 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "firebase-admin": "^12.1.0",
+    "moment": "^2.30.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "uuid": "^9.0.1"
   }
 }
