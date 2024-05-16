@@ -1,6 +1,12 @@
+const { CharsSchema, FamousShowingSchema, MatrixSchema } = require("../schema/algoritma.schema");
+
 exports.ReverseAlphabet = (req, res) => {
     try {
         const { chars } = req.body
+        const { error } = CharsSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send({ message: error.message })
+        }
         const Cleansing = (char) => char.join().replace(/\,/gm, '')
         const result = Cleansing(chars.match(/[a-z]|[A-Z]/gm).reverse()) + Cleansing(chars.match(/[0-9]/gm))
         return res.status(200).send({ result })
@@ -13,6 +19,10 @@ exports.ReverseAlphabet = (req, res) => {
 exports.LongestSentence = (req, res) => {
     try {
         const { chars } = req.body
+        const { error } = CharsSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send({ message: error.message })
+        }
         let result = ''
         chars.forEach(char => {
             if (char.length > result.length) {
@@ -29,6 +39,10 @@ exports.LongestSentence = (req, res) => {
 exports.FamousShowing = (req, res) => {
     try {
         const { input, query } = req.body
+        const { error } = FamousShowingSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send({ message: error.message })
+        }
         const container = {};
         input.forEach(x => {
             if (container[x]) {
@@ -48,6 +62,10 @@ exports.FamousShowing = (req, res) => {
 exports.MatrixNxN = (req, res) => {
     try {
         const { matrix } = req.body
+        const { error } = MatrixSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send({ message: error.message })
+        }
         const n = matrix.length;
         let diagonal1 = 0;
         let diagonal2 = 0;
