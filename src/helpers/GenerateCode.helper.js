@@ -6,7 +6,6 @@ exports.GenerateCodeMember = async (db) => {
     const GetMember = await member.findAll()
     const LastMember = GetMember[GetMember.length - 1]?.code || ''
     const checkLength = LastMember.length > 0 && LastMember.match(/[1-9]/gm)
-    console.log(checkLength);
     const addNumber = Number(checkLength) + 1
 
     switch (checkLength.length) {
