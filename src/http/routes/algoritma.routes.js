@@ -74,7 +74,7 @@ router.post('/famous', FamousShowing)
 
 /**
    * @openapi
-   * '/api/v1/algoritma/longest':
+   * '/api/v1/algoritma/matrix':
    *  post:
    *     tags:
    *     - Algoritma
