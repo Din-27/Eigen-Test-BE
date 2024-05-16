@@ -3,6 +3,8 @@ const BookRepository = require("../../repository/book.repository");
 
 exports.GetBookController = async (req, res) => {
     try {
+        // const test = new TestRepository(connectionFirebase)
+        // const data = test.findAll()
         const buku = new BookRepository(connectionFirebase)
         const data = await buku.findAll()
         const filtering = data.filter(x => x.stock !== 0)

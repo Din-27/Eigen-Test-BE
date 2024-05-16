@@ -4,14 +4,17 @@ exports.GenerateCodeMember = async (db) => {
     let code = 'M001'
     const member = new MemberRepository(db)
     const GetMember = await member.findAll()
-    const LastMember = GetMember[GetMember.length]?.code || []
-    const checkLength1 = LastMember.length > 0 && LastMember.slice(1).split('').filter(x => Number(x) !== 0).length
-    const addNumber = Number(LastMember.join()) + 1
-
-    if (checkLength1 === 2) {
+    const LastMember = GetMember[GetMember.length - 1]?.code || ''
+    const checkLength = LastMember.length > 0 && LastMember.match(/[1-9]/gm)
+    console.log(checkLength);
+    const addNumber = Number(checkLength) + 1
+    if (checkLength.length === 1) {
+        code = `M00${addNumber}`
+    }
+    if (checkLength.length === 2) {
         code = `M0${addNumber}`
     }
-    if (checkLength1 === 3) {
+    if (checkLength.length === 3) {
         code = `M${addNumber}`
     }
     return code

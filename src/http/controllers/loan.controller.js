@@ -100,7 +100,7 @@ exports.ReturnBookController = async (req, res) => {
         if (checkBookLoan.length === 0) {
             return res
                 .status(400)
-                .send({ message: 'Anda Belum pernah meminjam buku !' })
+                .send({ message: 'ID Buku yang anda masukan salah !' })
         }
         const codeMember = checkBookLoan[0].codeMember
         const codeBook = checkBookLoan[0].codeBook
