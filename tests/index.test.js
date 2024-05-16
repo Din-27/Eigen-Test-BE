@@ -2,7 +2,6 @@ const request = require('supertest');
 const app = require('../src/app');
 const admin = require('firebase-admin');
 
-// Mock Firebase Admin SDK
 jest.mock('firebase-admin', () => {
     const firestore = {
         collection: jest.fn().mockReturnThis(),
