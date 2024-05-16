@@ -6,7 +6,7 @@ const options = {
 	definition: {
 		openapi: '3.0.0',
 		info: {
-			title: 'REST API Docs',
+			title: 'Technical Test PT EIGEN TRI MATHEMA',
 			version
 		},
 	},
