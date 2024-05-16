@@ -1,5 +1,6 @@
 const connectionFirebase = require("../../config/connections/firebase.connection");
 const BookRepository = require("../../repository/book.repository");
+const { BookSchema } = require("../schema/book.schema");
 
 exports.GetBookController = async (req, res) => {
     try {
@@ -18,6 +19,10 @@ exports.GetBookController = async (req, res) => {
 exports.AddBookController = async (req, res) => {
     try {
         const { code, title, author } = req.body
+        const { error } = BookSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send({ message: error.message })
+        }
         const buku = new BookRepository(connectionFirebase)
         const checkName = await buku.findByCondition([
             { field: 'title', operator: '=', value: title },

@@ -2,6 +2,8 @@ const connectionFirebase = require("../../config/connections/firebase.connection
 const { GenerateCodeMember } = require("../../helpers/GenerateCode.helper");
 const LoanRepository = require("../../repository/loan.repository");
 const MemberRepository = require("../../repository/member.repository");
+const { MemberSchema } = require("../schema/member.schema")
+
 
 exports.GetMembersController = async (req, res) => {
     try {
@@ -34,6 +36,10 @@ exports.GetMembersController = async (req, res) => {
 exports.AddMemberController = async (req, res) => {
     try {
         const { name } = req.body
+        const { error } = MemberSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send({ message: error.message })
+        }
         const member = new MemberRepository(connectionFirebase)
         const checkName = await member.findByCondition([{ field: 'name', operator: '=', value: name }])
         if (checkName.length > 0) {

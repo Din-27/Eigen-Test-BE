@@ -3,6 +3,7 @@ const BookRepository = require("../../repository/book.repository")
 const LoanRepository = require("../../repository/loan.repository")
 const MemberRepository = require("../../repository/member.repository")
 const PenaltyRepository = require("../../repository/penalty.repository")
+const { PinjamSchema, KembalikanSchema } = require("../schema/loan.schema")
 const { v4: uuidv4 } = require('uuid');
 const moment = require('moment')
 const now = moment()
@@ -28,6 +29,10 @@ exports.GetLoanDatasController = async (req, res) => {
 
 exports.BorrowingBookController = async (req, res) => {
     const { codeMember, codeBook } = req.body
+    const { error } = PinjamSchema.validate(req.body);
+    if (error) {
+        return res.status(400).send({ message: error.message })
+    }
     try {
         const id = uuidv4()
         // const now = moment('2024-05-20T14:56:36+07:00')
@@ -86,6 +91,10 @@ exports.BorrowingBookController = async (req, res) => {
 
 exports.ReturnBookController = async (req, res) => {
     const { id } = req.body
+    const { error } = KembalikanSchema.validate(req.body);
+    if (error) {
+        return res.status(400).send({ message: error.message })
+    }
     try {
         // const now = moment('May 24, 2024');
 
